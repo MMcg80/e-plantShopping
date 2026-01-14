@@ -111,6 +111,13 @@ body {
     background-color: #c0392b;
 }
 
+/* Styles for when the button is disabled */
+.product-button:disabled {
+    background-color: #ccc; /* Grey color */
+    color: #666;
+    cursor: not-allowed; /* Shows a 'prohibited' icon on hover */
+}
+
 /* Pseudo-elements - Sale badge */
 .product-card::before {
     content: "SALE";
@@ -164,13 +171,21 @@ body {
     color: white;
     display: flex;
 }
-.cart_quantity_count{
-    margin-top: 16px;
-    /* background-color: red; */
-    margin-left: 27px;
-    position: absolute;
-    font-size: 29px;
+.cart_container {
+    position: relative;
+    display: inline-block;
+}
 
+.cart_quantity_count {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background-color: #ff4d4d; /* Red badge */
+    color: white;
+    border-radius: 50%;
+    padding: 2px 8px;
+    font-size: 16px;
+    font-weight: bold;
 }
 .plantname_heading{
    display: flex;
