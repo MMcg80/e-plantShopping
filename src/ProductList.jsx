@@ -264,14 +264,14 @@ function ProductList({ onHomeClick }) {
     };
 
     const handleAddToCart = (product) => {
-        dispatch(addItem(product)); // Dispatch the action to add the product to the cart (Redux action)
-      
-        setAddedToCart((prevState) => ({ // Update the local state to reflect that the product has been added
-          ...prevState, // Spread the previous state to retain existing entries
-          [product.name]: true, // Set the current product's name as a key with value 'true' to mark it as added
-        }));
-        
-      };
+        dispatch(addItem(product)); 
+        // We no longer need setAddedToCart here because useSelector 
+        // will detect the change in the Redux store automatically.
+    };
+    // 4. Create a helper to check if a plant is in the cart
+const isPlantInCart = (plantName) => {
+    return cartItems.some(item => item.name === plantName);
+};
     return (
         <div>
             <div className="navbar" style={styleObj}>
@@ -327,11 +327,11 @@ function ProductList({ onHomeClick }) {
             <div className="product-description">{plant.description}</div> {/* Display plant description */}
             <div className="product-cost">{plant.cost}</div> {/* Display plant cost */}
             <button
-                className={`product-button ${addedToCart[plant.name] ? 'disabled-button' : ''}`}
+                className={`product-button ${isPlantInCart(plant.name) ? 'disabled-button' : ''}`}
                 onClick={() => handleAddToCart(plant)}
-                disabled={addedToCart[plant.name]} 
+                disabled={isPlantInCart(plant.name)} 
             >
-                {addedToCart[plant.name] ? 'Added to Cart' : 'Add to Cart'}
+                {isPlantInCart(plant.name) ? 'Added to Cart' : 'Add to Cart'}
             </button>
             </div>
       ))}
